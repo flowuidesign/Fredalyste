@@ -1,1 +1,419 @@
-dcfudf
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographie : Analyse de la Présence Web - Guy Ativon</title>
+
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: fit-content; /* Base height */
+             /* Max height */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px; /* Taller on larger screens */
+            }
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 0.75rem; /* 12px */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem; /* 24px */
+            margin-bottom: 2rem; /* 32px */
+        }
+        .kpi-card {
+            background-color: #00509D; /* Brilliant Blue - Dark */
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .kpi-value {
+            font-size: 2.25rem; /* 36px */
+            font-weight: 700;
+        }
+        .kpi-label {
+            font-size: 0.875rem; /* 14px */
+            margin-top: 0.25rem;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem; /* Space for the dot and line */
+            margin-bottom: 1.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #00A8E8; /* Brilliant Blue - Light */
+            border: 2px solid white;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 15px;
+            width: 2px;
+            height: calc(100% - 5px);
+            background-color: #00A8E8; /* Brilliant Blue - Light */
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .swot-item {
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .swot-strength { background-color: #E6FFFA; border-left: 5px solid #38B2AC; } /* Teal accents */
+        .swot-weakness { background-color: #FFF5F5; border-left: 5px solid #FC8181; } /* Red accents */
+        .swot-opportunity { background-color: #F0FFF4; border-left: 5px solid #68D391; } /* Green accents */
+        .swot-threat { background-color: #FFFBEB; border-left: 5px solid #F6E05E; } /* Yellow accents */
+
+         .network-node {
+            background-color: #00A8E8; /* Light Blue */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* pill shape */
+            margin: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .network-center-node {
+            background-color: #00296B; /* Darkest Blue */
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem; /* 12px */
+            font-size: 1.25rem; /* 20px */
+            font-weight: 700;
+            margin-bottom: 2rem;
+             box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .network-connections {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Chosen Color Palette: Brilliant Blues */
+        /* Primary: #00509D (Dark Blue) */
+        /* Secondary: #00296B (Darkest Blue) */
+        /* Accent 1: #00A8E8 (Light Blue) */
+        /* Accent 2: #FDC500 (Gold/Yellow for highlights) */
+        /* Neutral: #FFFFFF (White for text/background) */
+        /* Background: #f0f4f8 (Light blue-gray for overall page) */
+
+        h1, h2, h3 { color: #00296B; /* Darkest Blue for headings */ }
+        .text-accent { color: #FDC500; } /* Gold/Yellow for accents */
+    </style>
+</head>
+<body class="antialiased">
+    <!-- 
+    Plan narratif de l'infographie :
+    1. Introduction : Guy Ativon - Un Profil Numérique en Lumière
+    2. Domaines d'Expertise Clés : Visualisation de ses compétences principales.
+    3. Focus Technologique : IA, Jumeaux Numériques, Immersif.
+    4. Réseau Professionnel et Collaborations : Ses liens avec des entreprises majeures.
+    5. Rayonnement Géographique : Présence internationale et régionale.
+    6. Projets Notables & Initiatives : Exemples concrets de son impact.
+    7. Analyse SWOT (Synthèse) : Forces, Faiblesses (recommandations), Opportunités, Menaces.
+    8. Recommandations Clés : Actions pour l'optimisation de sa présence.
+
+    Choix des visualisations :
+    - Domaines d'Expertise : Chart.js Donut Chart (Objectif: Comparer/Informer - Justification: Composition des expertises - Pas de SVG)
+    - Focus Technologique : Chart.js Bar Chart (Objectif: Comparer - Justification: Comparaison des focus technologiques - Pas de SVG)
+    - Réseau Professionnel : HTML/CSS structuré avec Tailwind (Objectif: Organiser - Justification: Montrer les relations sans SVG/Mermaid)
+    - Rayonnement Géographique : Liste HTML stylisée (Objectif: Informer - Justification: Simplicité et clarté - Pas de SVG)
+    - Projets Notables : Timeline HTML/CSS (Objectif: Organiser/Informer - Justification: Présentation chronologique/thématique claire - Pas de SVG)
+    - Analyse SWOT : Grille HTML/CSS (Objectif: Organiser - Justification: Format standard pour SWOT - Pas de SVG)
+    - Recommandations : Cartes/Liste HTML stylisée (Objectif: Informer - Justification: Clarté des actions - Pas de SVG)
+    Confirmation : Ni Mermaid JS ni SVG ne sont utilisés.
+    -->
+
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Guy Ativon : Un Profil Numérique en Lumière</h1>
+            <p class="text-lg text-gray-600">Analyse approfondie de la présence web d'un expert en technologie maritime et innovation énergétique.</p>
+        </header>
+
+        <section id="kpis" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <div class="kpi-card">
+                <div class="kpi-value">30+</div>
+                <div class="kpi-label">Années d'Expérience</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value">10+</div>
+                <div class="kpi-label">Domaines d'Expertise Clés</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value">5+</div>
+                <div class="kpi-label">Technologies Immersives Maîtrisées</div>
+            </div>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <section id="expertise" class="section-card">
+                <h2 class="text-2xl font-bold mb-6 text-center">Domaines d'Expertise Clés</h2>
+                <p class="text-gray-600 mb-4 text-center">Répartition des principaux pôles de compétences de M. Ativon, illustrant la diversité et la profondeur de son savoir-faire.</p>
+                <div class="chart-container">
+                    <canvas id="expertiseChart"></canvas>
+                </div>
+            </section>
+
+            <section id="tech-focus" class="section-card">
+                <h2 class="text-2xl font-bold mb-6 text-center">Focus Technologique Principal</h2>
+                <p class="text-gray-600 mb-4 text-center">Implication et maîtrise des technologies émergentes et stratégiques pour l'industrie maritime et énergétique.</p>
+                <div class="chart-container">
+                    <canvas id="techFocusChart"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <section id="reseau" class="section-card">
+            <h2 class="text-2xl font-bold mb-6 text-center">Réseau Professionnel et Collaborations Majeures</h2>
+            <p class="text-gray-600 mb-6 text-center">Visualisation des liens de M. Ativon avec des entreprises et organisations clés, témoignant de son influence et de ses partenariats stratégiques.</p>
+            <div class="text-center">
+                <div class="network-center-node">Guy Ativon</div>
+            </div>
+            <div class="network-connections">
+                <div class="network-node">Allucyne</div>
+                <div class="network-node">Consult-Elect</div>
+                <div class="network-node">General Electric</div>
+                <div class="network-node">Alstom</div>
+                <div class="network-node">Marine Technology Solutions (MTS)</div>
+                <div class="network-node">KAAS</div>
+                <div class="network-node">Université Polytechnique de Montréal</div>
+            </div>
+        </section>
+
+        <section id="geographie" class="section-card">
+            <h2 class="text-2xl font-bold mb-6 text-center">Rayonnement Géographique</h2>
+            <p class="text-gray-600 mb-6 text-center">Présence et impact de M. Ativon à l'échelle internationale et régionale, illustrant l'étendue de ses interventions et collaborations.</p>
+            <ul class="list-disc list-inside text-gray-700 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <li>France (Belfort, Bourgogne Franche-Comté, Verdun, Montbéliard)</li>
+                <li>Canada (Montréal)</li>
+                <li>Polynésie Française (Tahiti)</li>
+                <li>États-Unis (Miami, San Diego, Alaska)</li>
+                <li>Japon (Tokyo)</li>
+                <li>Afrique (Togo, Bénin, Côte d'Ivoire, Burkina Faso)</li>
+                <li>Monaco</li>
+            </ul>
+        </section>
+
+        <section id="projets" class="section-card">
+            <h2 class="text-2xl font-bold mb-6 text-center">Projets Notables & Initiatives Clés</h2>
+            <p class="text-gray-600 mb-6 text-center">Quelques exemples concrets des projets et initiatives qui marquent le parcours de M. Ativon et son engagement pour l'innovation.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3 class="font-semibold text-lg text-accent">Simulateur 3D pour la Marine Canadienne</h3>
+                    <p class="text-gray-600">Conception et déploiement d'un outil de formation immersive pour les équipages militaires (avec General Electric).</p>
+                </div>
+                <div class="timeline-item">
+                    <h3 class="font-semibold text-lg text-accent">Boîtier Électronique Intelligent</h3>
+                    <p class="text-gray-600">Développement d'une solution pour la prédiction des défaillances sur les disjoncteurs haute tension (avec Consult-Elect).</p>
+                </div>
+                <div class="timeline-item">
+                    <h3 class="font-semibold text-lg text-accent">Centre de Formation Technique Maritime</h3>
+                    <p class="text-gray-600">Création et gestion d'un centre dédié aux réseaux électriques maritimes (avec Consult-Elect).</p>
+                </div>
+                 <div class="timeline-item">
+                    <h3 class="font-semibold text-lg text-accent">Projet "Vaux devant Damloup, Verdun"</h3>
+                    <p class="text-gray-600">Reconstruction numérique d'un village détruit pendant la Grande Guerre, illustrant l'application des technologies immersives au patrimoine.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3 class="font-semibold text-lg text-accent">Initiative "Humanité et Patrimoine"</h3>
+                    <p class="text-gray-600">Projets visant à "faire revivre le passé" grâce aux technologies numériques.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3 class="font-semibold text-lg text-accent">Centre d'Excellence Maritime en Polynésie</h3>
+                    <p class="text-gray-600">Ambition de structurer un pôle d'innovation et de formation maritime de haut niveau en Polynésie Française.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="swot" class="section-card">
+            <h2 class="text-2xl font-bold mb-6 text-center">Analyse SWOT (Synthèse)</h2>
+            <p class="text-gray-600 mb-6 text-center">Évaluation stratégique des forces, faiblesses (axes d'amélioration), opportunités et menaces générales liées au profil de M. Ativon.</p>
+            <div class="swot-grid">
+                <div class="swot-item swot-strength">
+                    <h3 class="font-semibold text-lg mb-2">Forces</h3>
+                    <ul class="list-disc list-inside text-sm">
+                        <li>Plus de 30 ans d'expérience solide</li>
+                        <li>Expertise pointue (Jumeaux Numériques, IA, Immersif)</li>
+                        <li>Leadership et gestion de projets complexes</li>
+                        <li>Réseau international et collaborations prestigieuses</li>
+                        <li>Vision stratégique et capacité d'innovation</li>
+                    </ul>
+                </div>
+                <div class="swot-item swot-weakness">
+                    <h3 class="font-semibold text-lg mb-2">Faiblesses (Recommandations)</h3>
+                    <ul class="list-disc list-inside text-sm">
+                        <li>Cohérence et optimisation continue du profil LinkedIn</li>
+                        <li>Mise en récit plus explicite des projets uniques</li>
+                        <li>Augmenter la fréquence et la variété du contenu partagé</li>
+                    </ul>
+                </div>
+                <div class="swot-item swot-opportunity">
+                    <h3 class="font-semibold text-lg mb-2">Opportunités</h3>
+                    <ul class="list-disc list-inside text-sm">
+                        <li>Projet de Centre d'Excellence en Polynésie</li>
+                        <li>Transmission de savoir et formation de haut niveau</li>
+                        <li>Demande croissante pour la décarbonisation et la numérisation maritime</li>
+                        <li>Exploitation des technologies immersives pour de nouveaux marchés</li>
+                    </ul>
+                </div>
+                <div class="swot-item swot-threat">
+                    <h3 class="font-semibold text-lg mb-2">Menaces (Générales)</h3>
+                    <ul class="list-disc list-inside text-sm">
+                        <li>Évolution technologique rapide nécessitant une veille constante</li>
+                        <li>Concurrence dans les secteurs de l'innovation</li>
+                        <li>Complexité des projets internationaux</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="recommandations" class="section-card">
+            <h2 class="text-2xl font-bold mb-6 text-center">Recommandations Clés pour l'Optimisation</h2>
+            <p class="text-gray-600 mb-6 text-center">Actions stratégiques pour consolider et valoriser davantage la présence en ligne de M. Ativon.</p>
+            <ul class="space-y-4">
+                <li class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 class="font-semibold text-blue-700">1. Consolidation et Cohérence du Profil</h3>
+                    <p class="text-sm text-gray-600">Intégrer toutes les facettes du parcours sur LinkedIn. Mettre en avant les mots-clés stratégiques pour les objectifs actuels.</p>
+                </li>
+                <li class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 class="font-semibold text-blue-700">2. Mise en Récit des Projets Uniques</h3>
+                    <p class="text-sm text-gray-600">Valoriser les initiatives comme "Humanité et Patrimoine" ou les "Ateliers de transmission créative" via des publications dédiées.</p>
+                </li>
+                <li class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 class="font-semibold text-blue-700">3. Création de Contenu Ciblée</h3>
+                    <p class="text-sm text-gray-600">Publier régulièrement (articles, posts, vidéos) sur les expertises et projets pour renforcer le leadership d'opinion.</p>
+                </li>
+                <li class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 class="font-semibold text-blue-700">4. Engagement Actif et Stratégique</h3>
+                    <p class="text-sm text-gray-600">Interagir continuellement avec le réseau sur LinkedIn et autres plateformes pour augmenter la visibilité et les opportunités.</p>
+                </li>
+            </ul>
+        </section>
+
+        <footer class="text-center mt-12 py-8 border-t border-gray-300">
+            <p class="text-gray-500 text-sm">Cette présentation est une synthèse basée sur l'analyse de la présence web de Monsieur Guy Ativon <br> Rapport produit par Frederic Jacques AYI.</p>
+            
+        </footer>
+    </div>
+
+    <script>
+        function wrapText(text, maxWidth) {
+            if (typeof text !== 'string') return text;
+            const words = text.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + ' ' + words[i]).length > maxWidth) {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                } else {
+                    currentLine += ' ' + words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines.length > 1 ? lines : text; // Return array only if multiline
+        }
+        
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const expertiseData = {
+            labels: [
+                wrapText('Technologie Maritime', 16), 
+                wrapText('Innovation Énergétique', 16), 
+                wrapText('Jumeaux Numériques & IA', 16), 
+                wrapText('Formation Immersive & XR', 16), 
+                wrapText('Gestion de Projet & R&D', 16)
+            ],
+            datasets: [{
+                label: 'Domaines d\'Expertise',
+                data: [30, 25, 20, 15, 10],
+                backgroundColor: ['#00509D', '#00296B', '#00A8E8', '#5E86A8', '#2A6EAA'],
+                borderColor: '#FFFFFF',
+                borderWidth: 2
+            }]
+        };
+        new Chart(document.getElementById('expertiseChart'), {
+            type: 'doughnut',
+            data: expertiseData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+        const techFocusData = {
+            labels: [
+                wrapText('Intelligence Artificielle (IA)', 16), 
+                wrapText('Réalité Virtuelle (RV)', 16), 
+                wrapText('Réalité Augmentée (RA)', 16), 
+                wrapText('Réalité Mixte (MR)', 16), 
+                wrapText('Jumeaux Numériques', 16)
+            ],
+            datasets: [{
+                label: 'Niveau d\'Implication/Expertise (sur 5)',
+                data: [4, 5, 4, 4, 5],
+                backgroundColor: '#00A8E8',
+                borderColor: '#00509D',
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('techFocusChart'), {
+            type: 'bar',
+            data: techFocusData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: { x: { beginAtZero: true, max: 5 } },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
