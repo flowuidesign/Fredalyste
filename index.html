@@ -3,142 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stratégie d'Optimisation SEO - Agence Insolente</title>
+    <title>Exemple de Menu Latéral Animé</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 0;
+        /* Insérez ici le code CSS fourni dans la question */
+        .mdw-side-menu-area{
+            --hide-on-scroll: true;
+            --hide-on-scroll-amount: 100;
+            --menu-icon-width: 48px;
+            --menu-icon-gap: 15px;
         }
-        .container {
-            max-width: 960px;
-            margin: 20px auto;
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        .mdw-side-menu-area .mdw-hide-on-scroll{
+            transition: all 0.3s ease-in-out;
         }
-        h1 {
-            color: #1a1a1a;
-            text-align: center;
-            border-bottom: 3px solid #e67e22;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+        .mdw-side-menu-area .mdw-hide-on-scroll.hide{
+            opacity: 0;
+            pointer-events: none;
         }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 1px solid #bdc3c7;
-            padding-bottom: 10px;
-            margin-top: 40px;
-        }
-        h3 {
-            color: #34495e;
-            margin-top: 30px;
-        }
-        p, ul {
-            margin-bottom: 20px;
-        }
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        strong {
-            color: #e67e22;
-        }
-        code {
-            background-color: #ecf0f1;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: "Courier New", Courier, monospace;
-            color: #c0392b;
-        }
-        .summary {
-            background-color: #eaf2f8;
-            border-left: 5px solid #3498db;
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 5px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #7f8c8d;
-        }
+        /* ... (le reste de votre CSS) ... */
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Stratégie d'Optimisation SEO pour l'Agence Insolente</h1>
-        <p>L'objectif de cette stratégie n'est pas simplement d'attirer plus de visiteurs, mais d'attirer la <strong>bonne clientèle</strong> : celle qui recherche des expériences de voyage uniques et qui est prête à investir dans un service d'exception.</p>
+<div class="mdw-side-menu-area">
 
-        <h2>Pilier 1 : La Fondation Technique – Devenir Irréprochable pour Google</h2>
-        <p>Avant toute chose, il faut s'assurer que votre site est techniquement parfait. Google ne recommandera pas un site lent, confus ou difficile à explorer.</p>
-
-        <h3>Action 1 : Audit Technique Complet et Correction</h3>
-        <ul>
-            <li><strong>Vitesse de chargement :</strong> Visez un temps de chargement inférieur à 3 secondes. Optimisez le poids de vos images, qui sont certainement nombreuses et de haute qualité.</li>
-            <li><strong>Optimisation Mobile :</strong> Assurez-vous que l'expérience sur mobile est fluide et intuitive. C'est non-négociable.</li>
-            <li><strong>Santé du site :</strong> Détectez et corrigez les erreurs 404 (pages non trouvées), les liens brisés et les redirections incorrectes.</li>
-            <li><strong>Fichiers techniques :</strong> Assurez-vous que votre fichier <code>sitemap.xml</code> est à jour et soumis à Google Search Console, et que votre <code>robots.txt</code> ne bloque pas l'accès à des pages importantes.</li>
-        </ul>
-
-        <h3>Action 2 : Optimisation Sémantique des Pages Stratégiques (On-Page SEO)</h3>
-        <p>Pour chaque page clé (accueil, destinations, services), optimisez les éléments que Google lit en priorité en vous basant sur une recherche de mots-clés "intentionnistes" et "longue traîne" (ex: "voyage de luxe sur mesure kenya", "conciergerie de voyage").</p>
-        <ul>
-            <li><strong>Balises Title :</strong> Doivent être uniques et percutantes. (Ex: "Voyage de Luxe Sur Mesure au Kenya | Agence Insolente").</li>
-            <li><strong>Méta-descriptions :</strong> Pensez-y comme une publicité sur Google. Elles doivent donner envie de cliquer.</li>
-            <li><strong>Balises H1/H2 :</strong> Structurez votre contenu de manière logique en y plaçant vos mots-clés.</li>
-        </ul>
-
-        <h3>Action 3 : Implémentation des Données Structurées (Schema.org)</h3>
-        <p>Il s'agit d'un balisage spécifique pour aider Google à comprendre précisément le contenu de votre page (agence de voyage, itinéraire, etc.) et obtenir des résultats enrichis qui augmentent le taux de clic.</p>
-
-
-        <h2>Pilier 2 : Le Contenu – Devenir une Référence du Voyage d'Exception</h2>
-        <p>Votre contenu est votre meilleur commercial. Il doit inspirer, éduquer et prouver votre expertise unique.</p>
-
-        <h3>Action 4 : Lancer un "Carnet de Voyage" (Blog Haut de Gamme)</h3>
-        <p>Créez une section blog/magazine pour publier des articles de fond, riches et inspirants. Publiez de la qualité, pas forcément en grande quantité.</p>
-        <ul>
-            <li>Guides de destination ultra-détaillés.</li>
-            <li>Récits d'expériences et coulisses de la création d'un voyage.</li>
-            <li>Interviews de guides ou partenaires locaux.</li>
-        </ul>
-        
-        <h3>Action 5 : Développer des "Piliers de Contenu"</h3>
-        <p>Pour chaque grande destination, créez une page centrale très complète (une "Pillar Page") qui sert de hub et qui renvoie vers des articles de blog plus spécifiques. Cela montre à Google votre expertise profonde sur le sujet.</p>
-
-
-        <h2>Pilier 3 : L'Autorité – Devenir une Marque Reconnue et de Confiance</h2>
-        <p>Google fait confiance aux sites auxquels d'autres sites de confiance font référence.</p>
-
-        <h3>Action 6 : Stratégie de Netlinking (Obtention de Backlinks)</h3>
-        <p>Obtenez des liens entrants depuis d'autres sites web pertinents. La <strong>qualité prime sur la quantité</strong>. Ciblez des blogs de voyage de luxe, des magazines en ligne (sections voyage), ou des sites d'hôtels partenaires.</p>
-        
-        <h3>Action 7 : Maximiser la Preuve Sociale (E-réputation)</h3>
-        <p>Encouragez activement et systématiquement vos clients à laisser des avis. Créez et optimisez une fiche <strong>Google Business Profile</strong> (même sans agence physique) et créez une page "Témoignages" sur votre site avec des récits et des photos.</p>
-
-        <div class="summary">
-            <h3>Plan de Mise en Œuvre Simplifié</h3>
-            <ul>
-                <li><strong>Mois 1-2 (Fondation) :</strong> Audit technique complet, correction des problèmes majeurs, et optimisation des 5 pages les plus stratégiques.</li>
-                <li><strong>Mois 3-6 (Contenu) :</strong> Lancement du "Carnet de Voyage" (2 articles de fond/mois) et construction de la première "Pillar Page".</li>
-                <li><strong>En continu dès le Mois 3 (Autorité) :</strong> Début de la prospection pour le netlinking et mise en place d'un processus pour solliciter les avis clients.</li>
-            </ul>
+    <div class="mdw-side-menu-button mdw-hide-on-scroll">
+        <div class="elementor-widget-button">
+            <a href="#" class="elementor-button" role="button">
+                <span class="elementor-button-content-wrapper">
+                    <span class="elementor-button-text">Menu</span>
+                </span>
+            </a>
         </div>
-        
-        <footer>
-            <p>Document généré le 13 juin 2025. Cette stratégie est un investissement à long terme pour construire un canal d'acquisition de clients qualifiés et durables.</p>
-        </footer>
     </div>
+
+    <div class="mdw-side-menu">
+        <div class="e-con">
+
+            <div class="elementor-widget-icon-list">
+                <ul class="elementor-icon-list-items">
+                    <li class="elementor-icon-list-item">
+                        <a href="#accueil">
+                            <span class="elementor-icon-list-icon">
+                                </span>
+                            <span class="elementor-icon-list-text">Accueil</span>
+                        </a>
+                    </li>
+                    <li class="elementor-icon-list-item">
+                        <a href="#apropos">
+                            <span class="elementor-icon-list-icon"></span>
+                            <span class="elementor-icon-list-text">À Propos</span>
+                        </a>
+                    </li>
+                    <li class="elementor-icon-list-item">
+                        <a href="#services">
+                            <span class="elementor-icon-list-icon"></span>
+                            <span class="elementor-icon-list-text">Nos Services</span>
+                        </a>
+                    </li>
+                    <li class="elementor-icon-list-item">
+                        <a href="#contact">
+                            <span class="elementor-icon-list-icon"></span>
+                            <span class="elementor-icon-list-text">Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mdw-side-menu-social elementor-widget-icon-list">
+                 <ul class="elementor-icon-list-items">
+                    <li class="elementor-icon-list-item">
+                        <a href="#" target="_blank">
+                           <span class="elementor-icon-list-text">Facebook</span>
+                        </a>
+                    </li>
+                    <li class="elementor-icon-list-item">
+                        <a href="#" target="_blank">
+                           <span class="elementor-icon-list-text">Instagram</span>
+                        </a>
+                    </li>
+                    <li class="elementor-icon-list-item">
+                        <a href="#" target="_blank">
+                           <span class="elementor-icon-list-text">LinkedIn</span>
+                        </a>
+                    </li>
+                 </ul>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+if(!MDWNonce108){
+var MDWNonce108 = true
+var $ = jQuery
+$(document).ready(function(){
+function getCSS(el, property){
+    return getComputedStyle(el.get(0)).getPropertyValue(property)
+}
+function setCSS(el, property, value){
+    el.each(function(i){
+        el.get(i).style.setProperty(property, value)
+    })
+}
+function setSmallState($this){
+    var button = $this.find('.mdw-side-menu-button'),
+        mainMenu = $this.find('.mdw-side-menu'),
+        buttonRight = (parseFloat(getCSS(button, 'right')) - parseFloat(getCSS(mainMenu, 'right'))) + 'px',
+            buttonTop = (parseFloat(getCSS(button, 'top')) - parseFloat(getCSS(mainMenu, 'top'))) + 'px',
+        buttonHeight = button.height(),
+        buttonWidth = button.width()
+        
+    setCSS($this, '--button-right', buttonRight)
+    setCSS($this, '--button-top', buttonTop)
+    setCSS($this, '--button-height', buttonHeight + 'px')
+    setCSS($this, '--button-width', buttonWidth + 'px')
+    
+    $this.find('.mdw-side-menu .elementor-widget-icon-list').each(function(i){
+        var paddingBottom = getCSS($(this).find('.elementor-icon-list-item').eq(0), 'padding-bottom')
+        setCSS($(this).find('.elementor-icon-list-item'), '--padding-top', paddingBottom)
+    })
+}
+$(window).on('load resize', function(){
+$('.mdw-side-menu-area').each(function(){
+    setSmallState($(this))
+})
+})
+$('.mdw-side-menu-area').each(function(){
+    var $this = $(this)
+    setSmallState($this)
+    setTimeout(function(){
+        $this.addClass('anim')
+    },100)
+    
+    $(this).find('.mdw-side-menu .elementor-icon-list-item').each(function(i){
+        setCSS($(this), '--index', i)
+        var icon = $(this).find('.elementor-icon-list-icon')
+        if(icon.length && !icon.find('i').length){
+            icon.append('<i aria-hidden="true" class="fas fa-arrow-right"></i>')
+        }
+    })
+})
+$('.mdw-side-menu-button .elementor-widget-button').each(function(){
+    var wrapper = $(this).find('.elementor-button-content-wrapper'),
+    text = $(this).find('.elementor-button-text')
+    text.clone().appendTo(wrapper)
+})
+var clickLock = false
+$('.mdw-side-menu-button').on('click', function(){
+    if(clickLock) return
+    var $this = $(this),
+        menu = $this.closest('.mdw-side-menu-area'),
+        button = $this.find('.elementor-widget-button')
+        clickLock = true
+    if(menu.hasClass('open')){
+        button.eq(1).removeClass('open')
+        menu.removeClass('open-arrow')
+        setTimeout(function(){ menu.removeClass('open-instant') },300)
+        setTimeout(function(){ menu.removeClass('open') },500)
+        setTimeout(function(){ button.eq(0).removeClass('open') },750)
+    }else{
+        button.eq(0).addClass('open')
+        setTimeout(function(){ menu.addClass('open open-instant open-arrow') },500)
+        setTimeout(function(){ button.eq(1).addClass('open') },750)
+    }
+    setTimeout(function(){ clickLock = false },750)
+})
+$('.mdw-side-menu-button a').on('click', function(e){
+    e.preventDefault()
+})
+$('body').on('click', function(e){
+    $('.mdw-side-menu-area').each(function(){
+        if($(this).hasClass('open-instant') && !$(e.target).closest('.mdw-side-menu').length && !$(e.target).closest('.mdw-side-menu-button').length){
+            $(this).find('.mdw-side-menu-button').trigger('click')
+        }
+    })
+})
+$(window).on('scroll', function(){
+    $('.mdw-hide-on-scroll').each(function(){
+        var offset = isNaN(parseFloat(getCSS($(this), '--hide-on-scroll-amount'))) ? parseFloat(getCSS($(this), '--hide-on-scroll-amount')) : 100
+        if(getCSS($(this), '--hide-on-scroll').trim() == 'true'){
+            if($(window).scrollTop() > offset){
+                $(this).addClass('hide')    
+            }else{
+                $(this).removeClass('hide')
+            }
+        }
+    })
+})
+})
+}
+</script>
 
 </body>
 </html>
