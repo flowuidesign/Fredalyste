@@ -3,393 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exemple de Menu Latéral Animé</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-<style>
-.mdw-side-menu-area{
-    --hide-on-scroll: true;
-    --hide-on-scroll-amount: 100;
-    --menu-icon-width: 48px;
-    --menu-icon-gap: 15px;
-}
-.mdw-side-menu-area .mdw-hide-on-scroll{
-    transition: all 0.3s ease-in-out;
-}
-.mdw-side-menu-area .mdw-hide-on-scroll.hide{
-    opacity: 0;
-    pointer-events: none;
-}
-.mdw-side-menu-area .mdw-side-menu-button{
-    cursor: pointer;
-    height: var(--min-height,45px);
-    overflow: hidden !important;
-}
-.mdw-side-menu-area .mdw-side-menu-button .elementor-widget-button{
-    transition: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
-.mdw-side-menu-area.open .mdw-side-menu-button .elementor-widget-button{
-    transform: translateY(-100%);
-}
-.mdw-side-menu-area .mdw-side-menu-button .elementor-button{
-    height: var(--min-height,45px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.mdw-side-menu-area .mdw-side-menu-button .elementor-button-icon{
-    margin: 0;
-}
-.mdw-side-menu-area .mdw-side-menu-button .elementor-button-content-wrapper{
-    perspective: 6em;
-}
-.mdw-side-menu-area .mdw-side-menu-button .elementor-button-text:nth-child(1){
-    transform-origin: top;
-    transition: transform .55s cubic-bezier(.645,.045,.355,1), opacity .35s linear .2s;
-}
-.mdw-side-menu-area .mdw-side-menu-button .elementor-widget-button.open .elementor-button-text:nth-child(1){
-    opacity: 0;
-    transform: rotateX(90deg) scaleX(.9) translate3d(0, -10px, 0);
-}
-.mdw-side-menu-area .mdw-side-menu-button .elementor-button-text:nth-child(2){
-    position: absolute;
-    opacity: 0;
-    transform: rotateX(-90deg) scaleX(.9) translate3d(0, 10px, 0);
-    transform-origin: bottom;
-    transition: transform .55s cubic-bezier(.645,.045,.355,1), opacity .35s linear .2s;
-}
-.mdw-side-menu-area .mdw-side-menu-button .elementor-widget-button.open .elementor-button-text:nth-child(2){
-    opacity: 1;
-    transform: rotateX(0deg) scaleX(1) translateZ(0);
-    transition: transform .75s cubic-bezier(.645,.045,.355,1), opacity .35s linear .3s;
-}
-.mdw-side-menu-area:not(.open-arrow) .mdw-side-menu{
-    pointer-events: none;
-}
-.mdw-side-menu-area .mdw-side-menu:before{
-    top: 0;
-    right: 0;
-    left: unset;
-    transition: all 0.75s cubic-bezier(.76,0,.24,1);
-}
-.mdw-side-menu-area:not(.open) .mdw-side-menu:before{
-    height: var(--button-height,45px);
-    width: var(--button-width,110px);
-    transform: translate(calc(-1*var(--button-right,25px)), var(--button-top,25px));
-}
-.mdw-side-menu-area:not(.anim) .mdw-side-menu:before{
-    transition: none;
-    opacity: 0;
-}
-.mdw-side-menu-area .mdw-side-menu .e-con::-webkit-scrollbar,
-.mdw-side-menu-area .mdw-side-menu .e-container::-webkit-scrollbar{
-    display: none;
-}
-.mdw-side-menu-area .mdw-side-menu .e-con,
-.mdw-side-menu-area .mdw-side-menu .e-container{
-    overflow-y: auto;
-    max-height: calc(100vh - 20px - var(--margin-block-start,113px));
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-item,
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-item a{
-    perspective: calc(3*48px);
-    perspective-origin: bottom;
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-item{
-    margin-top: 0 !important;
-    padding-top: var(--padding-top);
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-item:first-child{
-    padding-top: 0;
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-item a{
-    outline: none;
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-icon{
-    width: var(--menu-icon-width,48px);
-    height: calc(0.6*var(--menu-icon-width,48px));
-    align-items: center;
-    padding-right: var(--menu-icon-gap,15px);
-    overflow: hidden;
-    opacity: 0;
-    box-sizing: content-box;
-}
-.mdw-side-menu-area.open-arrow .mdw-side-menu .elementor-icon-list-icon{
-    opacity: 1;
-    transition: all 0s cubic-bezier(.215,.61,.355,1) calc(var(--index,0) * .1s + 0.55s);
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-icon i{
-    width: 100% !important;
-    height: 0.1em;
-    background: currentColor;
-    position: relative;
-    margin-left: calc(0px - var(--menu-icon-width,48px) - var(--menu-icon-gap,15px));
-    transition: all .65s cubic-bezier(.215,.61,.355,1) !important;
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-icon svg{
-    display: none;
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-item:hover .elementor-icon-list-icon i{
-    margin-left: -0.07em;
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-icon i:before,
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-icon i:after{
-    content: "";
-    position: absolute;
-    width: 40%;
-    transform: rotate(45deg) translateX(0.05em);
-    transform-origin: right center;
-    height: 0.1em;
-    background: currentColor;
-    right: 0;
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-icon i:after{
-    transform: rotate(-45deg) translateX(0.05em);
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-text{
-    transform: rotateX(90deg) translate3d(0,60px,0);
-    opacity: 0;
-    transition: transform 0s linear .45s, opacity 0.3s linear !important;
-    transform-origin: center bottom;
-    padding-left: 0 !important;
-    max-width: calc(100% - var(--menu-icon-width,48px) - var(--menu-icon-gap,15px));
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-icon + .elementor-icon-list-text{
-    margin-left: calc(0px - var(--menu-icon-width,48px) - var(--menu-icon-gap,15px));
-}
-.mdw-side-menu-area .mdw-side-menu .elementor-icon-list-item:hover .elementor-icon-list-text{
-    margin-left: 0;
-}
-.mdw-side-menu-area.open-instant .mdw-side-menu .elementor-icon-list-text{
-    transform: rotateX(0deg);
-    opacity: 1;
-    transition: transform .65s cubic-bezier(.215,.61,.355,1) calc(var(--index,0) * .1s + .55s), opacity .35s linear calc(var(--index,0) * .1s + .55s), margin-left .65s cubic-bezier(.215,.61,.355,1) !important;
-}
-.mdw-side-menu-area .mdw-side-menu-social{
-    display: block;
-    background: none;
-}
-.mdw-side-menu-area .mdw-side-menu-social .elementor-widget-empty-icon{
-    display: none;
-}
-.mdw-side-menu-area .mdw-side-menu-social .elementor-icon-list-item{
-    width: 47%;
-    float: left;
-}
-.mdw-side-menu-area .mdw-side-menu-social a{
-    display: inline-block;
-    width: auto;
-}
-.mdw-side-menu-area .mdw-side-menu-social .elementor-icon-list-text{
-    transform: translate3d(0,100%,0);
-    transition: transform 0s linear .45s, opacity 0.3s linear;
-    max-width: 100%;
-}
-.mdw-side-menu-area.open-instant .mdw-side-menu-social .elementor-icon-list-text{
-    transition: opacity .45s linear 0s, transform .65s cubic-bezier(.215,.61,.355,1) 0s !important;
-    transition-delay: calc(var(--index)*.1s + .7s) !important;
-}
-.mdw-side-menu-area .mdw-side-menu-social .elementor-icon-list-text:after{
-    content: "";
-    height: 1px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: currentColor;
-    transform: scaleX(0%);
-    transform-origin: left;
-    transition: all 0.75s cubic-bezier(.645,.045,.355,1);
-}
-.mdw-side-menu-area .mdw-side-menu-social .elementor-icon-list-item:hover .elementor-icon-list-text:after{
-    transform: scaleX(100%);
-}
-@media (max-width:767px){
-.mdw-side-menu-area{
-    --menu-icon-width: 38px;
-    --menu-icon-gap: 10px;
-}
-.mdw-side-menu-area .mdw-side-menu-social .elementor-icon-list-item {
-    width: 50%;
-}
-}
-</style>
+    <title>FAQ & Templates – Réponses Messages – RODIS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="font-sans leading-relaxed text-gray-800 bg-gray-100 p-6">
+    <header class="text-center mb-10 pb-5 border-b-2 border-gray-300">
+        <h1 class="text-4xl font-extrabold text-blue-800">FAQ & Templates – Réponses Messages – RODIS</h1>
+    </header>
 
-<div class="mdw-side-menu-area">
+    <main class="max-w-4xl mx-auto">
+        <section class="bg-white p-6 mb-5 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-blue-700 mt-0 pb-1 border-b border-gray-200">1. Introduction & Consignes</h2>
+            <p class="mb-3"><strong class="font-bold">Objectif du document :</strong><br>Ce document centralise les réponses types et bonnes pratiques pour la gestion des messages clients sur Instagram et Facebook de la marque RODIS.<br>Le ton est chaleureux et professionnel, pour refléter au mieux l'image de la marque.</p>
+            <p class="mb-2"><strong class="font-bold">Consignes générales :</strong></p>
+            <ul class="list-disc ml-5 mb-3">
+                <li class="mb-1">Utiliser un ton chaleureux et professionnel.</li>
+                <li class="mb-1">Utiliser des emojis avec modération et pertinence.</li>
+                <li class="mb-1">Privilégier le vouvoiement.</li>
+                <li class="mb-1">Répondre rapidement, idéalement dans un délai de 2 à 4 heures.</li>
+                <li class="mb-1">Escalader les cas complexes ou sensibles au responsable communication.</li>
+            </ul>
+        </section>
 
-    <div class="mdw-side-menu-button mdw-hide-on-scroll">
-        <div class="elementor-widget-button">
-            <a href="#" class="elementor-button" role="button">
-                <span class="elementor-button-content-wrapper">
-                    <span class="elementor-button-text">Menu</span>
-                </span>
-            </a>
-        </div>
-    </div>
+        <section class="bg-white p-6 mb-5 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-blue-700 mt-0 pb-1 border-b border-gray-200">2. Réponses Types – Classées par Catégories</h2>
 
-    <div class="mdw-side-menu">
-        <div class="e-con">
+            <h3 class="text-xl font-semibold text-green-700 mt-5">2.1 Produits</h3>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">Quels sont les bienfaits de [nom du produit] ?</h4>
+            <p class="mb-3">Bonjour 😊, le [nom du produit] est conçu pour [bénéfice principal]. Il convient à [type de peau / cheveux] et peut être utilisé [fréquence]. ✨ Pour en savoir plus 👉 <a href="#" class="text-blue-500 hover:underline">[lien fiche produit]</a>.</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">Convient-il à tous les types de peau ?</h4>
+            <p class="mb-3">Oui, le [nom du produit] convient à tous types de peau, sauf indication contraire. Pour les peaux sensibles, nous recommandons un test sur une petite zone.</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">Est-ce que c’est naturel ? Bio ?</h4>
+            <p class="mb-3">Nos produits sont composés à [X]% d’ingrédients d’origine naturelle 🌿. Certains sont certifiés bio (voir étiquettes).</p>
 
-            <div class="elementor-widget-icon-list">
-                <ul class="elementor-icon-list-items">
-                    <li class="elementor-icon-list-item">
-                        <a href="#accueil">
-                            <span class="elementor-icon-list-icon">
-                                </span>
-                            <span class="elementor-icon-list-text">Accueil</span>
-                        </a>
-                    </li>
-                    <li class="elementor-icon-list-item">
-                        <a href="#apropos">
-                            <span class="elementor-icon-list-icon"></span>
-                            <span class="elementor-icon-list-text">À Propos</span>
-                        </a>
-                    </li>
-                    <li class="elementor-icon-list-item">
-                        <a href="#services">
-                            <span class="elementor-icon-list-icon"></span>
-                            <span class="elementor-icon-list-text">Nos Services</span>
-                        </a>
-                    </li>
-                    <li class="elementor-icon-list-item">
-                        <a href="#contact">
-                            <span class="elementor-icon-list-icon"></span>
-                            <span class="elementor-icon-list-text">Contact</span>
-                        </a>
-                    </li>
-                </ul>
+            <h3 class="text-xl font-semibold text-green-700 mt-5">2.2 Commandes & Livraison</h3>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">Où est ma commande ?</h4>
+            <p class="mb-3">Bonjour 🌟, pourriez-vous nous donner votre numéro de commande ? Nous vérifions cela pour vous immédiatement. 📦</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">En combien de temps je reçois ma commande ?</h4>
+            <p class="mb-3">Les livraisons prennent en général 3 à 5 jours ouvrés. Vous recevrez un lien de suivi dès que votre colis est expédié.</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">Puis-je modifier ou annuler ma commande ?</h4>
+            <p class="mb-3">Si la commande n’est pas encore expédiée, c’est possible. Merci de nous indiquer votre numéro de commande.</p>
+
+            <h3 class="text-xl font-semibold text-green-700 mt-5">2.3 Réactions / Effets secondaires</h3>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">J’ai eu une réaction après usage</h4>
+            <p class="mb-3">Nous sommes navrés d’apprendre cela. Pourriez-vous nous décrire ce qui s’est passé et nous envoyer une photo si possible ? Nous remontons l’information au service qualité. 🙏</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">Est-ce que je peux utiliser ce produit pendant la grossesse ?</h4>
+            <p class="mb-3">Certains produits sont compatibles avec la grossesse, mais pas tous. Merci de nous préciser le produit pour vérification.</p>
+
+            <h3 class="text-xl font-semibold text-green-700 mt-5">2.4 Demande de partenariats / influenceurs</h3>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">Peut-on collaborer ?</h4>
+            <p class="mb-3">Merci pour votre intérêt 💕 Vous pouvez envoyer votre proposition à : <a href="mailto:[email partenaire]" class="text-blue-500 hover:underline">[email partenaire]</a> ou remplir ce formulaire : <a href="#" class="text-blue-500 hover:underline">[lien]</a>. Notre équipe vous recontactera si besoin.</p>
+
+            <h3 class="text-xl font-semibold text-green-700 mt-5">2.5 Autres cas</h3>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">Messages agressifs / insultants</h4>
+            <p class="mb-3">Bonjour, nous vous invitons à formuler votre demande avec respect afin que nous puissions vous aider correctement. Merci de votre compréhension.</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">Messages incomplets ("C'est combien ?")</h4>
+            <p class="mb-3">Bonjour 😊, merci de préciser le produit qui vous intéresse afin que nous puissions vous répondre avec précision.</p>
+        </section>
+
+        <section class="bg-white p-6 mb-5 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-blue-700 mt-0 pb-1 border-b border-gray-200">3. Templates de Réponse – Messages privés</h2>
+            <h3 class="text-xl font-semibold text-green-700 mt-5">🛍 Réponse basique produit</h3>
+            <p class="whitespace-pre-line mb-3">Bonjour [Prénom] ✨,
+Merci pour votre message !
+Le [nom du produit] est parfait pour [utilisation]. Il aide à [bienfait] et convient à [type de peau].
+👉 Vous pouvez le retrouver ici : <a href="#" class="text-blue-500 hover:underline">[lien produit]</a>
+N’hésitez pas si vous avez d’autres questions 🧴</p>
+            <h3 class="text-xl font-semibold text-green-700 mt-5">📦 Réponse commande</h3>
+            <p class="whitespace-pre-line mb-3">Bonjour [Prénom] 😊,
+Merci pour votre message. Pour vous aider rapidement, merci de nous transmettre votre numéro de commande.
+Une fois reçu, nous pourrons vérifier le statut en quelques instants.
+À très vite ✨</p>
+            <h3 class="text-xl font-semibold text-green-700 mt-5">🚨 Réaction / effet secondaire</h3>
+            <p class="whitespace-pre-line mb-3">Bonjour [Prénom],
+Nous sommes vraiment désolés d’apprendre que vous avez eu une réaction après utilisation 😔.
+Merci de nous envoyer :
+- Le nom du produit utilisé
+- Une description de la réaction
+- Une photo si possible
+
+Nous transférons immédiatement à notre service qualité 🙏</p>
+        </section>
+
+        <section class="bg-white p-6 mb-5 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-blue-700 mt-0 pb-1 border-b border-gray-200">4. Réponses en commentaires publics</h2>
+            <p class="mb-2">Types de commentaires à gérer :</p>
+            <ul class="list-disc ml-5 mb-3">
+                <li class="mb-1">Questions produit sous un post</li>
+                <li class="mb-1">Demandes de prix</li>
+                <li class="mb-1">Réclamations visibles</li>
+                <li class="mb-1">Remerciements ou compliments</li>
+                <li class="mb-1">Messages trolls / provocateurs</li>
+            </ul>
+            <p class="mb-3">Exemples de réponses publiques (ton Rodis : chaleureux & professionnel)</p>
+
+            <h4 class="text-lg font-medium text-gray-700 mt-3">➤ Question sur un produit</h4>
+            <p class="mb-3">Merci pour votre question ✨ Le [nom du produit] est idéal pour [bénéfice]. Vous pouvez retrouver plus d’infos ici : <a href="#" class="text-blue-500 hover:underline">[lien]</a>. N’hésitez pas à nous écrire en message privé si besoin 💌</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">➤ Demande de prix</h4>
+            <p class="mb-3">Bonjour 😊, tous nos tarifs sont disponibles sur notre site ou en message privé. Vous pouvez aussi nous écrire pour un conseil personnalisé 🌿</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">➤ Réclamation visible</h4>
+            <p class="mb-3">Bonjour, nous sommes désolés de lire cela 😔. Merci de nous contacter en message privé avec les détails pour que notre équipe puisse vous aider rapidement 🙏</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">➤ Remerciement client</h4>
+            <p class="mb-3">Merci infiniment pour votre retour ! Votre satisfaction est notre plus belle récompense 💛✨</p>
+            <h4 class="text-lg font-medium text-gray-700 mt-3">➤ Commentaire négatif / provocateur</h4>
+            <p class="mb-3">Bonjour, nous restons à l’écoute de toute remarque constructive. N’hésitez pas à nous écrire en privé pour échanger. Merci 🙏</p>
+        </section>
+
+        <section class="bg-white p-6 mb-5 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-blue-700 mt-0 pb-1 border-b border-gray-200">5. Tableau de suivi – Questions fréquentes</h2>
+            <p class="mb-2">Utilité :</p>
+            <ul class="list-disc ml-5 mb-3">
+                <li class="mb-1">Analyser les tendances</li>
+                <li class="mb-1">Adapter les templates</li>
+                <li class="mb-1">Proposer des contenus ciblés (posts/réels)</li>
+            </ul>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-gray-600">Semaine</th>
+                            <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-gray-600">Thèmes les + posés</th>
+                            <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-gray-600">Produits cités</th>
+                            <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-gray-600">Mots clés récurrents</th>
+                            <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-gray-600">Ajustement FAQ ?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-3 px-4 border-b border-gray-300"></td>
+                            <td class="py-3 px-4 border-b border-gray-300"></td>
+                            <td class="py-3 px-4 border-b border-gray-300"></td>
+                            <td class="py-3 px-4 border-b border-gray-300"></td>
+                            <td class="py-3 px-4 border-b border-gray-300"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </section>
 
-            <div class="mdw-side-menu-social elementor-widget-icon-list">
-                 <ul class="elementor-icon-list-items">
-                    <li class="elementor-icon-list-item">
-                        <a href="#" target="_blank">
-                           <span class="elementor-icon-list-text">Facebook</span>
-                        </a>
-                    </li>
-                    <li class="elementor-icon-list-item">
-                        <a href="#" target="_blank">
-                           <span class="elementor-icon-list-text">Instagram</span>
-                        </a>
-                    </li>
-                    <li class="elementor-icon-list-item">
-                        <a href="#" target="_blank">
-                           <span class="elementor-icon-list-text">LinkedIn</span>
-                        </a>
-                    </li>
-                 </ul>
-            </div>
+        <section class="bg-white p-6 mb-5 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold text-blue-700 mt-0 pb-1 border-b border-gray-200">6. Historique des mises à jour</h2>
+            <p class="whitespace-pre-line mb-3">Date – Description – Auteur
+2025-07-18 – Création du document initial – Assistant Gemini</p>
+        </section>
+    </main>
 
-        </div>
-    </div>
-
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-if(!MDWNonce108){
-var MDWNonce108 = true
-var $ = jQuery
-$(document).ready(function(){
-function getCSS(el, property){
-    return getComputedStyle(el.get(0)).getPropertyValue(property)
-}
-function setCSS(el, property, value){
-    el.each(function(i){
-        el.get(i).style.setProperty(property, value)
-    })
-}
-function setSmallState($this){
-    var button = $this.find('.mdw-side-menu-button'),
-        mainMenu = $this.find('.mdw-side-menu'),
-        buttonRight = (parseFloat(getCSS(button, 'right')) - parseFloat(getCSS(mainMenu, 'right'))) + 'px',
-            buttonTop = (parseFloat(getCSS(button, 'top')) - parseFloat(getCSS(mainMenu, 'top'))) + 'px',
-        buttonHeight = button.height(),
-        buttonWidth = button.width()
-        
-    setCSS($this, '--button-right', buttonRight)
-    setCSS($this, '--button-top', buttonTop)
-    setCSS($this, '--button-height', buttonHeight + 'px')
-    setCSS($this, '--button-width', buttonWidth + 'px')
-    
-    $this.find('.mdw-side-menu .elementor-widget-icon-list').each(function(i){
-        var paddingBottom = getCSS($(this).find('.elementor-icon-list-item').eq(0), 'padding-bottom')
-        setCSS($(this).find('.elementor-icon-list-item'), '--padding-top', paddingBottom)
-    })
-}
-$(window).on('load resize', function(){
-$('.mdw-side-menu-area').each(function(){
-    setSmallState($(this))
-})
-})
-$('.mdw-side-menu-area').each(function(){
-    var $this = $(this)
-    setSmallState($this)
-    setTimeout(function(){
-        $this.addClass('anim')
-    },100)
-    
-    $(this).find('.mdw-side-menu .elementor-icon-list-item').each(function(i){
-        setCSS($(this), '--index', i)
-        var icon = $(this).find('.elementor-icon-list-icon')
-        if(icon.length && !icon.find('i').length){
-            icon.append('<i aria-hidden="true" class="fas fa-arrow-right"></i>')
-        }
-    })
-})
-$('.mdw-side-menu-button .elementor-widget-button').each(function(){
-    var wrapper = $(this).find('.elementor-button-content-wrapper'),
-    text = $(this).find('.elementor-button-text')
-    text.clone().appendTo(wrapper)
-})
-var clickLock = false
-$('.mdw-side-menu-button').on('click', function(){
-    if(clickLock) return
-    var $this = $(this),
-        menu = $this.closest('.mdw-side-menu-area'),
-        button = $this.find('.elementor-widget-button')
-        clickLock = true
-    if(menu.hasClass('open')){
-        button.eq(1).removeClass('open')
-        menu.removeClass('open-arrow')
-        setTimeout(function(){ menu.removeClass('open-instant') },300)
-        setTimeout(function(){ menu.removeClass('open') },500)
-        setTimeout(function(){ button.eq(0).removeClass('open') },750)
-    }else{
-        button.eq(0).addClass('open')
-        setTimeout(function(){ menu.addClass('open open-instant open-arrow') },500)
-        setTimeout(function(){ button.eq(1).addClass('open') },750)
-    }
-    setTimeout(function(){ clickLock = false },750)
-})
-$('.mdw-side-menu-button a').on('click', function(e){
-    e.preventDefault()
-})
-$('body').on('click', function(e){
-    $('.mdw-side-menu-area').each(function(){
-        if($(this).hasClass('open-instant') && !$(e.target).closest('.mdw-side-menu').length && !$(e.target).closest('.mdw-side-menu-button').length){
-            $(this).find('.mdw-side-menu-button').trigger('click')
-        }
-    })
-})
-$(window).on('scroll', function(){
-    $('.mdw-hide-on-scroll').each(function(){
-        var offset = isNaN(parseFloat(getCSS($(this), '--hide-on-scroll-amount'))) ? parseFloat(getCSS($(this), '--hide-on-scroll-amount')) : 100
-        if(getCSS($(this), '--hide-on-scroll').trim() == 'true'){
-            if($(window).scrollTop() > offset){
-                $(this).addClass('hide')    
-            }else{
-                $(this).removeClass('hide')
-            }
-        }
-    })
-})
-})
-}
-</script>
-
+    <footer class="text-center mt-10 pt-5 border-t border-gray-300 text-gray-600 text-sm">
+        <p>&copy; 2025 RODIS. Tous droits réservés.</p>
+    </footer>
 </body>
 </html>
